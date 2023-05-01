@@ -1,0 +1,38 @@
+Indexing (IXSCAN) vs Collection (collscan):
+in collection linear search happen whereas in indexing binary search takes place, because names field are stored in a sorted manner.
+
+hence speed of searching bcomes too fast.
+Indexes are stored in B-tree data structure.
+
+It stores 1. Index keys and 2. pointers to the document in collection.
+
+Due to indexing storage space requires more and if only read query happens more no issue will come but if write queries is more than performance will decrease.
+
+1. Single Indexing
+Syntax: db.teachers.craeteIndex( {"age": 1} )
+here 1 is Asc and -1 is Desc. Index name will be age_1.
+
+when to not use indexing??
+collection is small, col is frequently updated, queries are complex, col is large.
+
+2. Compound Indexing
+db.teachers.craeteIndex( {"age": 1, "gender": 1} )
+age_1_gender_1
+first sorting will be done by age and then by gender i.e, F first  and then M.
+
+To find total indexes availabe
+db.teachers.getIndex()
+
+To delete index
+db.teachers.dropIndex("age_1")
+
+Indexing also helps in sorting.  becoz if we sort according to age  then already indxing is in sorted order . so no more sorting again.
+
+Unique True:
+.createIndex( {name: 1}, {unique: true} )
+unique true is used here to specify no two names can be of same name in the index.
+
+Partial Filters:
+.createIndex( {age: 1}, {partialFilterExpression : {age: {$gt : 22 }} } )
+
+
